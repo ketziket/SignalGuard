@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SignalGuard</title>
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<div class="w">
+<h1>Signal<span>Guard</span></h1>
+<div class="sub">Biomedical IoT signal quality and sensor fault detection · software simulation</div>
+<div class="pipe"><b>Simulated ECG sensor · 250 Hz</b>→<b>Edge ring buffer · 5 s</b>→<b>Feature extraction · 2 s window</b>→<b>Rule classifier + SQI</b>→<b>Alerts and log</b></div>
+<div class="g">
+ <div class="c"><h2>Live ECG stream (Lead II, mV)</h2><canvas id="cv"></canvas>
+  <div style="margin-top:12px"><h2>Inject sensor fault</h2><div class="bt" id="fb"></div>
+  <div class="bt" style="margin-top:8px"><button id="auto">▶ Auto demo</button></div></div></div>
+ <div class="c"><h2>Signal quality index</h2>
+  <div class="big" id="sqi">100</div><div class="bar"><i id="sb"></i></div>
+  <span class="pill" id="st">GOOD</span>
+  <div style="margin-top:12px"><div class="r"><span>Injected fault</span><b id="ij">none</b></div>
+  <div class="r"><span>Detected fault</span><b id="dt">none</b></div>
+  <div class="r"><span>Detection latency</span><b id="lt">–</b></div>
+  <div class="r"><span>Heart rate (if valid)</span><b id="hr">–</b></div>
+  <div class="r"><span>Packets received</span><b id="pk">0</b></div></div></div>
+</div>
+<div class="g" style="margin-top:12px">
+ <div class="c"><h2>Extracted features vs. thresholds</h2><div class="m" id="mt"></div></div>
+ <div class="c"><h2>Event log</h2><div id="log"></div></div>
+</div>
+<p class="n">Method: a synthetic ECG (Gaussian P-QRS-T model) is streamed and corrupted by injected faults. Every 200 ms seven features are computed on the latest 2 s window (NaN ratio, standard deviation, clipping ratio, range, 50 Hz Goertzel power ratio, block-mean drift, median absolute first difference). A priority rule classifier names the fault, and SQI blends the worst and average feature penalties.</p>
+</div>
+<script src="src/core.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>

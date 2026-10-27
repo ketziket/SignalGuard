@@ -1,0 +1,10 @@
+{
+  "name": "signalguard",
+  "version": "1.0.0",
+  "description": "Biomedical IoT signal quality and sensor fault detection system (software simulation)",
+  "main": "src/core.js",
+  "scripts": {
+    "test": "node test/simulate.js"
+  },
+  "license": "MIT"
+}
